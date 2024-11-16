@@ -6,7 +6,7 @@ class DBConnection:
     DATABASE = 'data/customer.db'
 
     def get_db(self):
-
+        
         db = getattr(g, '_database', None)
         
         if db is None:
@@ -14,8 +14,7 @@ class DBConnection:
             
         return db
     
-    def close_connection(self):
+    def close_connection(self, conn):
 
-        db = getattr(g, '_database', None)
-        if db is not None:
-            db.close()
+        if conn is not None:
+            conn.close()

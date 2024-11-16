@@ -14,17 +14,24 @@ def status():
 @app.route("/customer/<int:id>", methods=["GET"])
 def show_customer_profile(id):
 
+    # establish the db connection 
     db = DBConnection()
-    conn = db.get_db()
+    conn = db.get_db().cursor()
+    
+    # get the customer
     data = conn.execute(f"SELECT CustomerId, FirstName from Customer WHERE CustomerId = {id}")
     customer = data.fetchone()
-    db.close_connection()
 
+    # close the db connection 
+    db.close_connection(conn)
+
+    # format the output
     response = {
         "id": customer[0],
         "first_name": customer[1]
     }
 
+    # return as JSON
     return json.dumps(response)
 
 if __name__ == "__main__": 
