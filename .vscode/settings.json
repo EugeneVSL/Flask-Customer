@@ -1,0 +1,10 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "${workspaceFolder:Flask-Customer}/flsk-customer-env/data/customer.db",
+            "name": "LocalDB"
+        }
+    ]
+}
