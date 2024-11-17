@@ -1,11 +1,15 @@
 import sqlite3
 import json
-from flask import Flask, jsonify, request
-from markupsafe import escape
+from flask import Flask 
 from db.connection import DBConnection
 
+# JWT modules
+from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
 
 app = Flask(__name__)
+
+app.config["JWT_SECRET_KEY"] = "secret"
+jwt = JWTManager(app)
 
 @app.route("/status", methods=["GET"])
 def status():
