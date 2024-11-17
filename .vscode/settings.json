@@ -5,6 +5,15 @@
             "driver": "SQLite",
             "database": "${workspaceFolder:Flask-Customer}/flsk-customer-env/data/customer.db",
             "name": "LocalDB"
+        },
+        {
+            "previewLimit": 50,
+            "server": "192.168.1.122",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "LocalPostGres",
+            "database": "dvd_rental",
+            "username": "dvd_rental_usr"
         }
     ]
 }
