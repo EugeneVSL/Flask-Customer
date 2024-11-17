@@ -19,7 +19,7 @@ def show_customer_profile(id):
     conn = db.get_db().cursor()
     
     # get the customer
-    data = conn.execute(f"SELECT CustomerId, FirstName from Customer WHERE CustomerId = {id}")
+    data = conn.execute(f"""SELECT * from Customer WHERE CustomerId = {id}""")
     customer = data.fetchone()
 
     # close the db connection 
@@ -28,7 +28,15 @@ def show_customer_profile(id):
     # format the output
     response = {
         "id": customer[0],
-        "first_name": customer[1]
+        "first_name": customer[1],
+        "last_name": customer[2],
+        "company": customer[3],
+        "address": customer[4],
+        "city": customer[5],
+        "state": customer[6],
+        "country": customer[7],
+        "postal_code": customer[8],
+        "phone": customer[9],
     }
 
     # return as JSON
