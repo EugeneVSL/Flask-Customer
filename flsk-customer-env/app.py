@@ -1,25 +1,29 @@
 import sqlite3
 import json
-from flask import Flask 
-from db.connection import DBConnection
+from flask import Flask, jsonify 
 
 # JWT modules
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
 
+from db.connection import DBConnection
+
 app = Flask(__name__)
 
-app.config["JWT_SECRET_KEY"] = "secret"
+# load the configuration values
+app.config.from_file("config.json", load=json.load)
+
+# create a JWT context
 jwt = JWTManager(app)
 
 @app.route("/status", methods=["GET"])
 def status():
-    return "<p>OK</p>"
+    return jsonify({"status": "OK"})
 
 @app.route("/customer/<int:id>", methods=["GET"])
 def show_customer_profile(id):
 
     # establish the db connection 
-    db = DBConnection()
+    db = DBConnection(app)
     conn = db.get_db().cursor()
     
     # get the customer
@@ -44,7 +48,7 @@ def show_customer_profile(id):
     }
 
     # return as JSON
-    return json.dumps(response)
+    return jsonify(response)
 
 if __name__ == "__main__": 
     app.run(debug=True) 

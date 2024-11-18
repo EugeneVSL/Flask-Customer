@@ -4,7 +4,8 @@ from flask import g
 
 class DBConnection:
 
-    DATABASE = 'data/customer.db'
+    def __init__(self, app):
+        self.DATABASE = app.config.get("DATABASE")
 
     def get_db(self):
 
